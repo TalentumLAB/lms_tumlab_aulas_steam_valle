@@ -44,7 +44,7 @@ services:
       KEYCLOAK_EXTRA_ARGS: "--import-realm"
 
       KEYCLOAK_LOG_LEVEL: INFO
-      THEME_NAME: aulassteambalboa
+      THEME_NAME: aulas_steam_balboa
     ports:
       - 8080:8080
       - 8443:8443
