@@ -57,8 +57,8 @@ services:
       - aulas-steam-net
 
   backend:
-    image: bilinguismotalentum/backend:1.0.0
-    container_name: aulas_valle_reporter_backend
+    image: bilinguismotalentum/backend:1.1.0
+    container_name: aulas_steam_reporter_backend
     restart: always
     extra_hosts:
       - "host.docker.internal:host-gateway"
@@ -68,7 +68,7 @@ services:
       DB_PORT: 3306
       DB_USER: bilinguismo-db-user
       DB_PASSWORD: Bilinguismo2022*
-      DB_NAME: bilinguismo_db
+      DB_NAME: simat_db
       KEYCLOAK_DB_HOST: host.docker.internal
       KEYCLOAK_DB_PORT: 5432
       KEYCLOAK_DB_USER: bilinguismo_db_user
@@ -82,8 +82,8 @@ services:
       - aulas-steam-net
 
   frontend:
-    image: bilinguismotalentum/frontend:1.0.0
-    container_name: aulas_valle_reporter_frontend
+    image: bilinguismotalentum/frontend:1.1.11
+    container_name: aulas_steam_reporter_frontend
     restart: always
     environment:
       KEYCLOAK_CLIENT_ID: si-frontend
