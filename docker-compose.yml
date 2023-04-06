@@ -68,7 +68,7 @@ services:
       DB_PORT: 3306
       DB_USER: bilinguismo-db-user
       DB_PASSWORD: Bilinguismo2022*
-      DB_NAME: simat_db
+      DB_DATABASE: simat_db
       KEYCLOAK_DB_HOST: host.docker.internal
       KEYCLOAK_DB_PORT: 5432
       KEYCLOAK_DB_USER: bilinguismo_db_user
@@ -88,7 +88,7 @@ services:
     environment:
       KEYCLOAK_CLIENT_ID: si-frontend
       KEYCLOAK_CLIENT_SECRET: 616a597f-2af2-409d-bbd6-f5a0787d90d7
-      KEYCLOAK_HOST: http://tumlab.local:8080
+      KEYCLOAK_HOST: http://tumlab.local:8080/auth
       KEYCLOAK_REALM: aulassteambalboa
       NEXT_PUBLIC_DEFAULT_AUTH_PROVIDER: keycloak
       NEXT_PUBLIC_BACKEND: http://tumlab.local:4001
