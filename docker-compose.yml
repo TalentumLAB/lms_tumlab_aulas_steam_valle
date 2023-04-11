@@ -44,7 +44,7 @@ services:
       KEYCLOAK_EXTRA_ARGS: "--import-realm"
 
       KEYCLOAK_LOG_LEVEL: INFO
-      THEME_NAME: aulassteambuenosaires
+      THEME_NAME: aulassteampatia
     ports:
       - 8080:8080
       - 8443:8443
@@ -63,7 +63,7 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     environment:
-      JWKS_URI: http://tumlab.local:8080/auth/realms/aulassteambuenosaires/protocol/openid-connect/certs
+      JWKS_URI: http://tumlab.local:8080/auth/realms/aulassteampatia/protocol/openid-connect/certs
       DB_HOST: host.docker.internal
       DB_PORT: 3306
       DB_USER: bilinguismo-db-user
@@ -89,7 +89,7 @@ services:
       KEYCLOAK_CLIENT_ID: si-frontend
       KEYCLOAK_CLIENT_SECRET: 616a597f-2af2-409d-bbd6-f5a0787d90d7
       KEYCLOAK_HOST: http://tumlab.local:8080/auth
-      KEYCLOAK_REALM: aulassteambuenosaires
+      KEYCLOAK_REALM: aulassteampatia
       NEXT_PUBLIC_DEFAULT_AUTH_PROVIDER: keycloak
       NEXT_PUBLIC_BACKEND: http://tumlab.local:4001
       NEXTAUTH_URL: http://tumlab.local:3000
