@@ -82,7 +82,7 @@ services:
       - aulas-steam-net
 
   frontend:
-    image: bilinguismotalentum/frontend:1.1.11
+    image: bilinguismotalentum/frontend:1.1.12-puerto-leguizamo
     container_name: aulas_steam_reporter_frontend
     restart: always
     environment:
