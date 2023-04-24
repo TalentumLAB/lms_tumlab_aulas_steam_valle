@@ -41,7 +41,7 @@ services:
       KEYCLOAK_ENABLE_STATISTICS: true
       KEYCLOAK_PRODUCTION: false
       KC_HTTP_RELATIVE_PATH: "/auth"
-      KEYCLOAK_EXTRA_ARGS: "--import-realm"
+      # KEYCLOAK_EXTRA_ARGS: "--import-realm"
 
       KEYCLOAK_LOG_LEVEL: INFO
       THEME_NAME: aulassteampatia
