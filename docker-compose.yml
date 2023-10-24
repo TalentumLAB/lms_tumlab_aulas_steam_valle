@@ -19,6 +19,7 @@ services:
     restart: always
     extra_hosts:
       - "host.docker.internal:host-gateway"
+      - "tumlab.local:192.168.4.1"
     environment:
       KEYCLOAK_CREATE_ADMIN_USER: true
       KEYCLOAK_ADMIN_USER: admin
@@ -26,7 +27,7 @@ services:
       KEYCLOAK_MANAGEMENT_USER: manager
       KEYCLOAK_MANAGEMENT_PASSWORD: password
 
-      KEYCLOAK_DATABASE_VENDOR: POSTGRES
+      # KEYCLOAK_DATABASE_VENDOR: POSTGRES
       KEYCLOAK_DATABASE_HOST: host.docker.internal
       KEYCLOAK_DATABASE_PORT: 5432
       KEYCLOAK_DATABASE_NAME: keycloak
@@ -57,32 +58,42 @@ services:
       - aulas-steam-net
 
   backend:
-    image: bilinguismotalentum/backend:1.1.0
+    image: bilinguismotalentum/backend:1.2.8
     container_name: aulas_steam_reporter_backend
     restart: always
     extra_hosts:
       - "host.docker.internal:host-gateway"
+      - "tumlab.local:192.168.4.1"
     environment:
       JWKS_URI: http://tumlab.local:8080/auth/realms/aulassteamvalle/protocol/openid-connect/certs
       DB_HOST: host.docker.internal
       DB_PORT: 3306
-      DB_USER: bilinguismo-db-user
-      DB_PASSWORD: Bilinguismo2022*
+      DB_USER: root
+      DB_PASSWORD: Tumlab2022*
       DB_DATABASE: simat_db
-      KEYCLOAK_DB_HOST: host.docker.internal
+      KEYCLOAK_DB_HOST: host.docker.internal  
       KEYCLOAK_DB_PORT: 5432
       KEYCLOAK_DB_USER: bilinguismo_db_user
       KEYCLOAK_DB_PASSWORD: Bilinguismo2022*
       KEYCLOAK_DB_NAME: keycloak
+      KEYCLOAK_API_URL: /admin/realms/aulasregional
+      KEYCLOAK_BASE_URL: http://tumlab.local:8080/auth
+      KEYCLOAK_CLIENT_ID: client-api
+      KEYCLOAK_CLIENT_SECRET: xO3iPvLUatj4psBZ65cWZNBO4Cy1IPfh
+      KEYCLOAK_GET_TOKEN_URL: /realms/aulasregional/protocol/openid-connect/token
+      OVERRIDE_DB_HOST: host.docker.internal
+      OVERRIDE_DB_PASSWORD: Tumlab2022*
+      OVERRIDE_DB_PORT: 3306
+      OVERRIDE_DB_USER: root
     ports:
-      - "4001:4000"
+      - "4000:4000"
     depends_on:
       - keycloak
     networks:
       - aulas-steam-net
 
   frontend:
-    image: bilinguismotalentum/frontend:1.1.12-valle
+    image: bilinguismotalentum/frontend:1.4.6-valle
     container_name: aulas_steam_reporter_frontend
     restart: always
     environment:
@@ -93,6 +104,8 @@ services:
       NEXT_PUBLIC_DEFAULT_AUTH_PROVIDER: keycloak
       NEXT_PUBLIC_BACKEND: http://tumlab.local:4001
       NEXTAUTH_URL: http://tumlab.local:3000
+      NEXT_PUBLIC_DATABASE_KEY_NAME: bilinguismo_db
+      NEXT_PUBLIC_URL_DATA_SYNC: https://sync.aulasteamvalle.com.co/data
     ports: 
       - "3000:3000"
     depends_on:
@@ -102,11 +115,12 @@ services:
       - aulas-steam-net
 
   moodle:
-    image: docker.io/bitnami/moodle:4
+    image: bilinguismotalentum/php74-apache2:1.0.1
     container_name: aulas_valle_moodle
     restart: always
     extra_hosts:
       - "host.docker.internal:host-gateway"
+      - "tumlab.local:192.168.4.1"
     environment:
       MOODLE_DATABASE_TYPE: mysqli
       MOODLE_DATABASE_HOST: host.docker.internal
@@ -116,13 +130,12 @@ services:
       MOODLE_DATABASE_NAME: moodle_db
       MOODLE_SKIP_BOOTSTRAP: true
     ports:
-      - '5000:8080'
-      - '443:8443'
+      - '5000:80'
     networks:
       - aulas-steam-net
     volumes:
-      - '/tumlab/apps/moodle/moodledata:/bitnami/moodledata'
-      - '/tumlab/apps/moodle/moodle:/bitnami/moodle'
+      - '/tumlab/apps/moodle/moodledata:/var/www/moodledata'
+      - '/tumlab/apps/moodle/moodle:/var/www/html'
     
 # volumes:
 #   moodledata_data:
