@@ -79,7 +79,7 @@ services:
       KEYCLOAK_API_URL: /admin/realms/aulassteamvalle
       KEYCLOAK_BASE_URL: http://tumlab.local:8080/auth
       KEYCLOAK_CLIENT_ID: client-api
-      KEYCLOAK_CLIENT_SECRET: xO3iPvLUatj4psBZ65cWZNBO4Cy1IPfh
+      KEYCLOAK_CLIENT_SECRET: NyTg9WUT6UtdP8ZuaOd0AMjKtT0qCUZB
       KEYCLOAK_GET_TOKEN_URL: /realms/aulassteamvalle/protocol/openid-connect/token
       OVERRIDE_DB_HOST: host.docker.internal
       OVERRIDE_DB_PASSWORD: Tumlab2022*
